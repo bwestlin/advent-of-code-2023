@@ -55,7 +55,12 @@ impl FromStr for Data {
 }
 
 fn read_input<R: Read>(reader: BufReader<R>) -> Result<Input> {
-    reader.lines().map(|line| line?.parse::<Data>()).collect()
+    reader
+        .lines()
+        .map(Result::ok)
+        .flatten()
+        .map(|line| line.parse::<Data>().context("Unable to parse input line"))
+        .collect()
 }
 
 fn input() -> Result<Input> {
