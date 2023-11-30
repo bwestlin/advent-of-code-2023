@@ -1,0 +1,28 @@
+[package]
+name = "advent-of-code-2023"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "*"
+bitvec = "*"
+md5 = "*"
+num_cpus = "*"
+once_cell = "*"
+rayon = "*"
+regex = "*"
+time = "*"
+smallvec = "*"
+static_init = "*"
+pretty_assertions = "*"
+
+[features]
+default = []
+print = []
+timeit = []
+
+[lib]
+name = "utils"
+path = "src/lib.rs"
