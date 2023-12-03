@@ -20,8 +20,8 @@ fn extract_digits(s: &str) -> (Vec<i32>, Vec<i32>) {
     let chrs = s.chars().collect::<Vec<_>>();
     for idx in 0..s.len() {
         let c = chrs[idx];
-        if c >= '0' && c <= '9' {
-            let digit = (c as u8 - '0' as u8) as i32;
+        if c.is_ascii_digit() {
+            let digit = (c as u8 - b'0') as i32;
             digits1.push(digit);
             digits2.push(digit);
         }
@@ -36,11 +36,11 @@ fn extract_digits(s: &str) -> (Vec<i32>, Vec<i32>) {
 }
 
 fn calibration_from_digits(digits: &[i32]) -> i32 {
-    digits.iter().next().unwrap_or(&0) * 10 + digits.into_iter().last().unwrap_or(&0)
+    digits.iter().next().unwrap_or(&0) * 10 + digits.iter().last().unwrap_or(&0)
 }
 
 fn solve(input: &Input) -> (i32, i32) {
-    input.into_iter().fold((0, 0), |(r1, r2), s| {
+    input.iter().fold((0, 0), |(r1, r2), s| {
         let (digits1, digits2) = extract_digits(s);
         (
             r1 + calibration_from_digits(&digits1),
@@ -62,8 +62,7 @@ fn main() -> Result<()> {
 fn read_input<R: Read>(reader: BufReader<R>) -> Result<Input> {
     reader
         .lines()
-        .map(Result::ok)
-        .flatten()
+        .map_while(Result::ok)
         .map(|line| line.parse::<String>().context("Unable to parse input line"))
         .collect()
 }
