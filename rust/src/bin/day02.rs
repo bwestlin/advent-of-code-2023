@@ -65,7 +65,7 @@ fn solve(input: &Input) -> (i32, i32) {
         blue: 14,
     };
 
-    input.into_iter().fold((0, 0), |(mut p1, mut p2), game| {
+    input.iter().fold((0, 0), |(mut p1, mut p2), game| {
         if game.possible(&loaded_p1) {
             p1 += game.id;
         }
@@ -90,10 +90,10 @@ impl FromStr for Game {
     type Err = anyhow::Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut split = s.splitn(2, ':');
-        let id_part = split.next().context("no id part")?.split(' ');
+        let mut id_part = split.next().context("no id part")?.split(' ');
         let reveal_part = split.next().context("no reveal part")?.split(';');
 
-        let id = id_part.skip(1).next().context("no id")?.parse()?;
+        let id = id_part.nth(1).context("no id")?.parse()?;
         let mut revealed_cubes = vec![];
 
         for part in reveal_part {
@@ -122,8 +122,7 @@ impl FromStr for Game {
 fn read_input<R: Read>(reader: BufReader<R>) -> Result<Input> {
     reader
         .lines()
-        .map(Result::ok)
-        .flatten()
+        .map_while(Result::ok)
         .map(|line| line.parse::<Game>().context("Unable to parse input line"))
         .collect()
 }
