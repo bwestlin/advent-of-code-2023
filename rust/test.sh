@@ -7,4 +7,4 @@ if [ -z "$DAY" ]
     exit 1
 fi
 
-RUST_BACKTRACE=0 cargo watch -x "test --features=\"$2\" --bin day$DAY --release -- --nocapture"
+RUST_BACKTRACE=0 cargo watch --poll -x "test --features=\"$2\" --bin day$DAY --release -- --nocapture"
