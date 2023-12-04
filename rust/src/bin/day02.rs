@@ -58,7 +58,7 @@ impl Game {
     }
 }
 
-fn solve(input: &Input) -> (i32, i32) {
+fn both_parts(input: &Input) -> (i32, i32) {
     let loaded_p1 = Cubes {
         red: 12,
         green: 13,
@@ -79,7 +79,7 @@ fn solve(input: &Input) -> (i32, i32) {
 fn main() -> Result<()> {
     measure(|| {
         let input = input()?;
-        let (part1, part2) = solve(&input);
+        let (part1, part2) = both_parts(&input);
         println!("Part1: {}", part1);
         println!("Part2: {}", part2);
         Ok(())
@@ -156,13 +156,13 @@ mod tests {
 
     #[test]
     fn test_part1() -> Result<()> {
-        assert_eq!(solve(&as_input(INPUT)?).0, 8);
+        assert_eq!(both_parts(&as_input(INPUT)?).0, 8);
         Ok(())
     }
 
     #[test]
     fn test_part2() -> Result<()> {
-        assert_eq!(solve(&as_input(INPUT)?).1, 2286);
+        assert_eq!(both_parts(&as_input(INPUT)?).1, 2286);
         Ok(())
     }
 }

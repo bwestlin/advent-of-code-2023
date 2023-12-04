@@ -39,7 +39,7 @@ fn calibration_from_digits(digits: &[i32]) -> i32 {
     digits.iter().next().unwrap_or(&0) * 10 + digits.iter().last().unwrap_or(&0)
 }
 
-fn solve(input: &Input) -> (i32, i32) {
+fn both_parts(input: &Input) -> (i32, i32) {
     input.iter().fold((0, 0), |(r1, r2), s| {
         let (digits1, digits2) = extract_digits(s);
         (
@@ -52,7 +52,7 @@ fn solve(input: &Input) -> (i32, i32) {
 fn main() -> Result<()> {
     measure(|| {
         let input = input()?;
-        let (part1, part2) = solve(&input);
+        let (part1, part2) = both_parts(&input);
         println!("Part1: {}", part1);
         println!("Part2: {}", part2);
         Ok(())
@@ -104,13 +104,13 @@ mod tests {
 
     #[test]
     fn test_part1() -> Result<()> {
-        assert_eq!(solve(&as_input(INPUT1)?).0, 142);
+        assert_eq!(both_parts(&as_input(INPUT1)?).0, 142);
         Ok(())
     }
 
     #[test]
     fn test_part2() -> Result<()> {
-        assert_eq!(solve(&as_input(INPUT2)?).1, 281);
+        assert_eq!(both_parts(&as_input(INPUT2)?).1, 281);
         Ok(())
     }
 }

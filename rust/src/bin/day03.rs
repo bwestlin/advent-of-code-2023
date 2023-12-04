@@ -118,7 +118,7 @@ impl Engine {
     }
 }
 
-fn solve(input: &Input) -> (i32, i32) {
+fn both_parts(input: &Input) -> (i32, i32) {
     let Examination {
         part_numbers,
         gear_ratios,
@@ -133,7 +133,7 @@ fn solve(input: &Input) -> (i32, i32) {
 fn main() -> Result<()> {
     measure(|| {
         let input = input()?;
-        let (part1, part2) = solve(&input);
+        let (part1, part2) = both_parts(&input);
         println!("Part1: {}", part1);
         println!("Part2: {}", part2);
         Ok(())
@@ -183,13 +183,13 @@ mod tests {
 
     #[test]
     fn test_part1() -> Result<()> {
-        assert_eq!(solve(&as_input(INPUT)?).0, 4361);
+        assert_eq!(both_parts(&as_input(INPUT)?).0, 4361);
         Ok(())
     }
 
     #[test]
     fn test_part2() -> Result<()> {
-        assert_eq!(solve(&as_input(INPUT)?).1, 467835);
+        assert_eq!(both_parts(&as_input(INPUT)?).1, 467835);
         Ok(())
     }
 }

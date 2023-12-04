@@ -30,7 +30,7 @@ fn part2(input: &Input) -> i32 {
     0
 }
 
-// fn solve(input: &Input) -> (i32, i32) {
+// fn both_parts(input: &Input) -> (i32, i32) {
 //     dbg!(input);
 //     (0, 0)
 // }
@@ -38,7 +38,7 @@ fn part2(input: &Input) -> i32 {
 fn main() -> Result<()> {
     measure(|| {
         let input = input()?;
-        // let (part1, part2) = solve(&input);
+        // let (part1, part2) = both_parts(&input);
         println!("Part1: {}", part1(&input));
         println!("Part2: {}", part2(&input));
         Ok(())
