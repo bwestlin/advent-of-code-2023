@@ -68,7 +68,7 @@ impl FromStr for Card {
 
         let numbers_you_have = numbers_part
             .next()
-            .context("no numbers you have ")?
+            .context("no numbers you have")?
             .trim()
             .split(' ')
             .filter_map(|s| s.parse::<i32>().ok())
